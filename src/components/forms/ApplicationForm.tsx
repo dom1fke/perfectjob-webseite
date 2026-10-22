@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useId, useRef, useState, type DragEvent } from "react";
 import { useSearchParams } from "next/navigation";
 import { FileText, UploadCloud, X } from "lucide-react";
@@ -154,9 +155,9 @@ export function ApplicationForm() {
       <div className="sm:col-span-2">
         <PrivacyCheckbox error={errors.privacy}>
           Ich habe die{" "}
-          <a href="/datenschutz#bewerbung" target="_blank" className="font-semibold text-ink underline underline-offset-2">
+          <Link href="/datenschutz#bewerbung" target="_blank" className="font-semibold text-ink underline underline-offset-2">
             Datenschutzhinweise für Bewerber:innen
-          </a>{" "}
+          </Link>{" "}
           gelesen. Meine Daten werden ausschließlich für das Bewerbungsverfahren genutzt und spätestens 6 Monate nach
           dessen Abschluss gelöscht.
         </PrivacyCheckbox>

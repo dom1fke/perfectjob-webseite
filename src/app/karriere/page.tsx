@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { asset } from "@/lib/paths";
 import Link from "next/link";
 import { Suspense } from "react";
 import { ArrowRight, Check, Phone } from "lucide-react";
@@ -140,7 +141,7 @@ export default function KarrierePage() {
             />
             <Reveal className="relative mt-8 hidden aspect-[4/3] overflow-hidden rounded-3xl lg:block">
               <Image
-                src="/images/bewerbung-laptop.jpg"
+                src={asset("/images/bewerbung-laptop.jpg")}
                 alt="Junge Frau bewirbt sich entspannt am Laptop"
                 fill
                 sizes="35vw"

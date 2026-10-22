@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { asset } from "@/lib/paths";
 import { Ear, HeartHandshake, Scale, ShieldCheck } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { Container, PageHero, SectionHeading } from "@/components/ui";
@@ -53,7 +54,7 @@ export default function UeberUnsPage() {
         <Container className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
           <Reveal className="relative aspect-[4/3] overflow-hidden rounded-[2rem] shadow-2xl shadow-ink/10">
             <Image
-              src="/images/team-haende.jpg"
+              src={asset("/images/team-haende.jpg")}
               alt="Ein Team aus Pflegekräften hält zusammen"
               fill
               sizes="(min-width: 1024px) 45vw, 100vw"

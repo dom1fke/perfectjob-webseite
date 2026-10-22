@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { asset } from "@/lib/paths";
 import Link from "next/link";
 import { ArrowRight, BadgeCheck, Building2, HeartPulse, MapPin, PhoneCall, ShieldCheck, UserCheck } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
@@ -67,7 +68,7 @@ export default function Home() {
           <div className="relative animate-fade-up [animation-delay:150ms]">
             <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] shadow-2xl shadow-ink/15 lg:aspect-[4/4.4]">
               <Image
-                src="/images/team-haende.jpg"
+                src={asset("/images/team-haende.jpg")}
                 alt="Pflegekräfte legen als Zeichen des Zusammenhalts die Hände übereinander"
                 fill
                 priority

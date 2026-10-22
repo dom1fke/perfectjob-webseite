@@ -8,6 +8,7 @@ import { MobileActionBar } from "@/components/MobileActionBar";
 import { ConsentProvider } from "@/components/consent/ConsentProvider";
 import { CookieBanner } from "@/components/consent/CookieBanner";
 import { site } from "@/config/site";
+import { isStaticPreview } from "@/lib/paths";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -16,6 +17,8 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description: site.description,
+  // Die GitHub-Pages-Vorschau soll nicht in Suchmaschinen auftauchen
+  robots: isStaticPreview ? { index: false, follow: false } : undefined,
   openGraph: {
     type: "website",
     locale: "de_DE",

@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const isDev = process.env.NODE_ENV !== "production";
+// Statische Vorschau für GitHub Pages (siehe .github/workflows/pages.yml)
+const isStaticPreview = process.env.NEXT_PUBLIC_STATIC_PREVIEW === "true";
 
 const csp = [
   "default-src 'self'",
@@ -16,7 +18,7 @@ const csp = [
   "object-src 'none'",
 ].join("; ");
 
-const nextConfig: NextConfig = {
+const serverConfig: NextConfig = {
   poweredByHeader: false,
   images: { formats: ["image/avif", "image/webp"] },
   async headers() {
@@ -35,4 +37,12 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+// GitHub Pages liefert nur statische Dateien aus: kein Server, keine Header, keine Bildoptimierung.
+const staticPreviewConfig: NextConfig = {
+  output: "export",
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH,
+  trailingSlash: true,
+  images: { unoptimized: true },
+};
+
+export default isStaticPreview ? staticPreviewConfig : serverConfig;

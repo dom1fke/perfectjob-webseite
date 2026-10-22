@@ -2,6 +2,8 @@
 
 import { useCallback, useState, type FormEvent } from "react";
 import type { FieldErrors } from "@/lib/validation";
+import { isStaticPreview } from "@/lib/paths";
+import { site } from "@/config/site";
 
 type Status = "idle" | "pending" | "success";
 
@@ -54,6 +56,13 @@ export function useFormSubmit(endpoint: string, prepare?: (data: FormData) => vo
       }
       setErrors(next);
       focusFirstError(form, Object.keys(next));
+      return;
+    }
+
+    if (isStaticPreview) {
+      setFormError(
+        `Dies ist eine Vorschau – das Formular sendet noch nichts. Bitte rufen Sie uns an (${site.contact.phone}) oder schreiben Sie an ${site.contact.email}.`,
+      );
       return;
     }
 

@@ -32,6 +32,15 @@ npm run build
 Ohne SMTP-Konfiguration werden Formular-E-Mails im Entwicklungsmodus nur in der Konsole ausgegeben.
 Für den echten Versand `.env.example` nach `.env.local` kopieren und ausfüllen.
 
+## Vorschau auf GitHub Pages
+
+Bei jedem Push auf `main` baut `.github/workflows/pages.yml` eine statische Vorschau:
+https://dom1fke.github.io/perfectjob-webseite/
+
+- Einmalig einstellen: *Settings → Pages → Source: „GitHub Actions“*
+- Die Vorschau hat keinen Server: Formulare zeigen nur einen Hinweis statt zu senden, Sicherheits-Header fehlen.
+- Sie ist für Suchmaschinen gesperrt (`noindex`) und nicht als Live-Seite gedacht.
+
 ## Inhalte pflegen
 
 - Firmendaten, Kontakt, Impressumsangaben: `src/config/site.ts`
