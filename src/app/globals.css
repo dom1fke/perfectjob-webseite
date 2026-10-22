@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+@theme {
+  /* Markenfarben – Rot aus dem Perfect-Job-Logo */
+  --color-brand-50: #fdf2f2;
+  --color-brand-100: #fbe3e4;
+  --color-brand-200: #f6c2c4;
+  --color-brand-500: #e1262c;
+  --color-brand-600: #d30b11;
+  --color-brand-700: #b0090e;
+  --color-brand-800: #8c0a0e;
+
+  /* Anthrazit & warme Neutraltöne */
+  --color-ink: #1d2126;
+  --color-ink-soft: #3a4049;
+  --color-muted: #646b75;
+  --color-line: #e7e3df;
+  --color-sand: #f7f4f1;
+  --color-sand-dark: #efeae5;
+
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit Variable", "Inter Variable", ui-sans-serif, sans-serif;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-fade-up: fade-up 0.7s var(--ease-out-soft) both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 6rem;
+  }
+  body {
+    background: #fff;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: var(--color-brand-100);
+    color: var(--color-brand-800);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand-600);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+/* Sanftes Einblenden beim Scrollen (siehe components/Reveal.tsx) */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s var(--ease-out-soft),
+    transform 0.7s var(--ease-out-soft);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+[data-reveal][data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* FAQ-Akkordeon mit weicher Höhenanimation */
+.faq-item::details-content {
+  block-size: 0;
+  overflow: hidden;
+  transition:
+    block-size 0.35s var(--ease-out-soft),
+    content-visibility 0.35s allow-discrete;
+}
+.faq-item[open]::details-content {
+  block-size: auto;
+}
+@supports (interpolate-size: allow-keywords) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+}
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
