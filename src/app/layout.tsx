@@ -8,7 +8,7 @@ import { MobileActionBar } from "@/components/MobileActionBar";
 import { ConsentProvider } from "@/components/consent/ConsentProvider";
 import { CookieBanner } from "@/components/consent/CookieBanner";
 import { site } from "@/config/site";
-import { isStaticPreview } from "@/lib/paths";
+import { noIndex } from "@/lib/paths";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   },
   description: site.description,
   // Vorschau (GitHub Pages) und Testordner sollen nicht in Suchmaschinen auftauchen
-  robots: isStaticPreview || process.env.NEXT_PUBLIC_NOINDEX === "true" ? { index: false, follow: false } : undefined,
+  robots: noIndex ? { index: false, follow: false } : undefined,
   openGraph: {
     type: "website",
     locale: "de_DE",

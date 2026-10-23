@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 /*
  * TODO vor dem Livegang:
  * - Hosting-Anbieter eintragen und Auftragsverarbeitungsvertrag (AVV) abschließen
- * - E-Mail-Anbieter (SMTP) eintragen und AVV abschließen
+ * - Anbieter des E-Mail-Postfachs eintragen und AVV abschließen
  * - Text von einer fachkundigen Stelle prüfen lassen
  */
 
@@ -53,10 +53,14 @@ export default function DatenschutzPage() {
 
       <h2>3. Kontaktaufnahme</h2>
       <p>
-        Wenn Sie uns per Kontaktformular, E-Mail, Telefon oder WhatsApp kontaktieren, verarbeiten wir Ihre Angaben (z.
-        B. Name, E-Mail-Adresse, Telefonnummer, Einrichtung, Nachricht), um Ihre Anfrage zu bearbeiten. Die Angaben aus
-        dem Kontaktformular werden per E-Mail an uns weitergeleitet und nicht auf dem Webserver
-        gespeichert.
+        Wenn Sie uns per E-Mail, Telefon oder WhatsApp kontaktieren, verarbeiten wir Ihre Angaben (z. B. Name,
+        E-Mail-Adresse, Telefonnummer, Einrichtung, Nachricht), um Ihre Anfrage zu bearbeiten.
+      </p>
+      <p>
+        <strong>Formulare auf dieser Website:</strong> Unsere Kontakt- und Bewerbungsformulare übertragen keine Daten an
+        unseren Webserver. Ihre Eingaben werden ausschließlich in Ihrem Browser zu einer vorbereiteten Nachricht
+        zusammengefasst, die sich in Ihrem E-Mail-Programm (bzw. in WhatsApp) öffnet. Erst wenn Sie diese Nachricht dort
+        selbst absenden, erhalten wir Ihre Angaben – wie bei einer gewöhnlichen E-Mail.
       </p>
       <p>
         Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit einem Vertrag zusammenhängt oder der
@@ -67,16 +71,16 @@ export default function DatenschutzPage() {
       <p>
         <strong>WhatsApp:</strong> Wenn Sie uns über WhatsApp kontaktieren, werden Ihre Daten auch durch die WhatsApp
         Ireland Ltd. (Meta) verarbeitet; dabei ist eine Übermittlung in die USA möglich. Bitte nutzen Sie alternativ
-        Telefon, E-Mail oder unser Formular, wenn Sie das nicht möchten.
+        Telefon oder E-Mail, wenn Sie das nicht möchten.
       </p>
 
       <h2 id="bewerbung">4. Bewerbungen</h2>
       <p>
-        Wenn Sie sich über unser Bewerbungsformular oder auf anderem Weg bei uns bewerben, verarbeiten wir Ihre
-        Angaben (Kontaktdaten, Qualifikation, gewünschte Arbeitszeit, Nachricht sowie freiwillig hochgeladene
-        Unterlagen wie Lebenslauf und Zeugnisse) ausschließlich zur Durchführung des Bewerbungsverfahrens. Die Daten
-        werden per E-Mail an uns weitergeleitet und nicht auf dem Webserver gespeichert. Sie erhalten eine
-        automatische Eingangsbestätigung an die angegebene E-Mail-Adresse.
+        Wenn Sie sich per E-Mail (auch über unser Bewerbungsformular, das eine E-Mail vorbereitet), per WhatsApp,
+        telefonisch oder auf anderem Weg bei uns bewerben, verarbeiten wir Ihre Angaben (Kontaktdaten, Qualifikation,
+        gewünschte Arbeitszeit, Nachricht sowie freiwillig beigefügte Unterlagen wie Lebenslauf und Zeugnisse)
+        ausschließlich zur Durchführung des Bewerbungsverfahrens. Auf dieser Website selbst werden keine
+        Bewerbungsdaten gespeichert.
       </p>
       <p>
         Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO in Verbindung mit § 26 BDSG (Anbahnung eines
@@ -91,10 +95,10 @@ export default function DatenschutzPage() {
         möglicher Ansprüche nach dem Allgemeinen Gleichbehandlungsgesetz (AGG).
       </p>
 
-      <h2>5. E-Mail-Versand</h2>
+      <h2>5. E-Mail-Postfach</h2>
       <p>
-        Für den Versand der Formularinhalte nutzen wir den E-Mail-Dienst unseres Anbieters [E-Mail-Anbieter, Anschrift].
-        Mit dem Anbieter besteht ein Vertrag über die Auftragsverarbeitung nach Art. 28 DSGVO.
+        E-Mails an uns werden im Postfach unseres Anbieters [E-Mail-Anbieter, Anschrift] gespeichert. Mit dem Anbieter
+        besteht ein Vertrag über die Auftragsverarbeitung nach Art. 28 DSGVO.
       </p>
 
       <h2>6. Cookies und lokale Speicherung</h2>

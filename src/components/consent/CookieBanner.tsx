@@ -106,7 +106,7 @@ export function CookieBanner() {
                 <span className="text-xs font-semibold tracking-wide text-muted uppercase">Immer aktiv</span>
               </div>
               <p className="mt-1 text-sm text-muted">
-                Speichert Ihre Cookie-Auswahl und sorgt für die sichere Übermittlung von Formularen.
+                Speichert Ihre Cookie-Auswahl, damit dieser Hinweis nicht bei jedem Besuch erscheint.
               </p>
             </div>
             <label className="flex cursor-pointer items-start justify-between gap-4 rounded-xl border border-line p-4 transition-colors hover:border-ink/25">

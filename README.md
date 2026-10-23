@@ -4,10 +4,10 @@ Neue Webseite für **Perfect Job**, Personal- und Pflegedienstleister in Mainz, 
 
 ## Technik
 
-- Next.js 15 (App Router), React 19, TypeScript
+- Next.js 15 (App Router) als **rein statischer Export** – kein Server-Code, kein PHP, keine Datenbank
 - Tailwind CSS 4, Schriften lokal eingebunden (Inter, Outfit) – keine Google-Fonts-Verbindung
-- Formulare (Kontakt, Personalanfrage, Bewerbung mit Datei-Upload) → E-Mail per SMTP (`nodemailer`)
-- Spamschutz ohne Drittanbieter: Honeypot, Mindest-Ausfüllzeit, Ratenbegrenzung
+- Formulare (Kontakt, Personalanfrage, Bewerbung) bereiten eine E-Mail bzw. WhatsApp-Nachricht vor, die
+  Besucher:innen selbst absenden (`mailto:`). Die Webseite überträgt oder speichert keine Formulardaten.
 - Cookie-Einwilligung: nur „externe Medien“ (OpenStreetMap-Karte, Zwei-Klick-Lösung); kein Tracking
 
 ## Seiten
@@ -26,48 +26,29 @@ Neue Webseite für **Perfect Job**, Personal- und Pflegedienstleister in Mainz, 
 ```bash
 npm install
 npm run dev        # http://localhost:3000
-npm run build
+npm run build      # erzeugt den Ordner out/
+npm run preview    # out/ lokal ansehen: http://localhost:4000
 ```
 
-Ohne SMTP-Konfiguration werden Formular-E-Mails im Entwicklungsmodus nur in der Konsole ausgegeben.
-Für den echten Versand `.env.example` nach `.env.local` kopieren und ausfüllen.
+## Veröffentlichen
 
-## Vorschau auf GitHub Pages
+### Webspace (z. B. der bisherige Hoster von perfectjob-mainz.de)
 
-Bei jedem Push auf `main` baut `.github/workflows/pages.yml` eine statische Vorschau:
-https://dom1fke.github.io/perfectjob-webseite/
+1. `npm run build` – für einen Testordner: `NEXT_PUBLIC_BASE_PATH=/neu NEXT_PUBLIC_NOINDEX=true npm run build`
+   (dann in `out/.htaccess` `ErrorDocument 404 /neu/404.html` setzen)
+2. Den **Inhalt** von `out/` per SFTP hochladen – inklusive `.htaccess` (Sicherheits-Header, HTTPS, PHP gesperrt).
+3. Vor dem Ersetzen der alten Seite: Sicherung der WordPress-Installation. Wird danach kein PHP mehr gebraucht,
+   kann PHP im Kundenmenü des Hosters abgeschaltet werden.
 
-- Einmalig einstellen: *Settings → Pages → Source: „GitHub Actions“*
-- Die Vorschau hat keinen Server: Formulare zeigen nur einen Hinweis statt zu senden, Sicherheits-Header fehlen.
-- Sie ist für Suchmaschinen gesperrt (`noindex`) und nicht als Live-Seite gedacht.
+### Vorschau auf GitHub Pages
 
-## Livebetrieb auf dem Webspace (Apache + PHP)
-
-Die Seite läuft dort als statischer Export, die Formulare über zwei PHP-Skripte (`php/`).
-E-Mails gehen über die `mail()`-Funktion des Hosters – es liegt kein Postfach-Passwort auf dem Server.
-
-**Voraussetzung:** Eine PHP-Version mit den Sicherheitskorrekturen vom 21.10.2026
-(mind. 8.2.35 / 8.3.36 / 8.4.27 / 8.5.12). Prüfen mit `php/tools/php-version-check.php`
-(einzeln hochladen, aufrufen, sofort wieder löschen).
-
-```bash
-npm run build:webspace -- /neu   # Testordner perfectjob-mainz.de/neu/ (noindex)
-npm run build:webspace           # Hauptverzeichnis
-```
-
-1. Inhalt von `webspace-build/` per SFTP in den Web-Ordner (bzw. `/neu`) hochladen – inkl. der `.htaccess`-Dateien.
-2. `php/lib/config.example.php` als `perfectjob-config.php` **eine Ebene über** dem Web-Ordner ablegen und ausfüllen
-   (notfalls als `lib/config.php`; `lib/` ist gesperrt). Zum Testen `'dry_run' => true`.
-3. Formulare testen; prüfen, dass `…/lib/bootstrap.php` und `…/lib/config.php` mit 403 antworten.
-4. Vor dem Wechsel ins Hauptverzeichnis: Sicherung der alten WordPress-Seite.
-
-Die Auswahllisten (Stellen, Arbeitszeit) für die PHP-Prüfung erzeugt der Build aus `src/content/content.ts`.
-Ändern sich die Anliegen im Kontaktformular, `php/api/kontakt.php` mit anpassen.
+Bei jedem Push auf `main` baut `.github/workflows/pages.yml` die Vorschau (noindex):
+https://dom1fke.github.io/perfectjob-webseite/ – Einstellung: *Settings → Pages → Source: „GitHub Actions“*.
 
 ## Inhalte pflegen
 
 - Firmendaten, Kontakt, Impressumsangaben: `src/config/site.ts`
-- Stellen, Vorteile, FAQ, Ablauf: `src/content/content.ts`
+- Stellen, Vorteile, FAQ, Ablauf: `src/content/content.ts`; Formular-Auswahllisten: `src/content/forms.ts`
 - Bilder: `public/images/`
 
 ## Vor dem Livegang (TODO)
@@ -79,4 +60,8 @@ Die Auswahllisten (Stellen, Arbeitszeit) für die PHP-Prüfung erzeugt der Build
 - [ ] Vorteile/Versprechen (Tarif, 48-h-Rückmeldung, Rufbereitschaft …) mit Perfect Job abstimmen
 - [ ] Logo als Vektordatei (SVG) besorgen – aktuell nachgebaut
 - [ ] Kundenlogos/Zitate nur mit schriftlicher Freigabe
-- [ ] Hosting festlegen (Node-fähig, Serverstandort EU), SMTP-Zugang hinterlegen
+
+## Frühere Varianten
+
+Echte Formulare mit Datei-Upload gab es als Node.js-Version (Commit `b84d60a`) und als PHP-Version (Commit `3116dbc`).
+Sie lassen sich aus der Git-Historie zurückholen, falls später ein Node-Hoster genutzt wird.

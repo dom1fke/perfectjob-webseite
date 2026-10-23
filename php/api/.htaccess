@@ -1,7 +1,0 @@
-# Nur die beiden Formular-Endpunkte sind aufrufbar
-<FilesMatch "\.php$">
-    Require all denied
-</FilesMatch>
-<FilesMatch "^(kontakt|bewerbung)\.php$">
-    Require all granted
-</FilesMatch>

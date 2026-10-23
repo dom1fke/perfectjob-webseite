@@ -1,6 +1,5 @@
 # Baut eine statische Vorschau der Webseite und veröffentlicht sie auf GitHub Pages.
 # Einstellung im Repo: Settings → Pages → Source: „GitHub Actions“.
-# Hinweis: Formulare senden in der Vorschau nichts (kein Server auf GitHub Pages).
 name: GitHub Pages Vorschau
 
 on:
@@ -27,11 +26,9 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      # API-Routen (Formularversand) lassen sich nicht statisch exportieren
-      - run: rm -rf src/app/api
       - run: npm run build
         env:
-          NEXT_PUBLIC_STATIC_PREVIEW: "true"
+          NEXT_PUBLIC_NOINDEX: "true"
           NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
       - run: touch out/.nojekyll
       - uses: actions/upload-pages-artifact@v3

@@ -1,11 +1,13 @@
-# Perfect Job – Webseite (statischer Export + PHP-Formulare)
+# Perfect Job – Webseite (rein statisch, kein PHP nötig)
+# Wird auf GitHub Pages ignoriert; gilt auf Apache-Webspace.
 
 Options -Indexes
 DirectoryIndex index.html
+# Bei einem Testordner (z. B. /neu) hier den Pfad anpassen: /neu/404.html
 ErrorDocument 404 /404.html
 
-# PHP-Dateien außerhalb von /api/ sperren (keine vergessenen Test- oder Fremdskripte)
-<FilesMatch "\.php$">
+# Die Seite braucht kein PHP – alte oder fremde Skripte niemals ausführen
+<FilesMatch "\.(php\d?|phtml|phar|cgi|pl|py)$">
     Require all denied
 </FilesMatch>
 
@@ -30,7 +32,6 @@ ErrorDocument 404 /404.html
     Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"
     Header unset X-Powered-By
 
-    # Dateien mit Hash im Namen dürfen lange zwischengespeichert werden
     <FilesMatch "\.(js|css|woff2?|png|jpe?g|webp|avif|svg)$">
         Header set Cache-Control "public, max-age=31536000, immutable"
     </FilesMatch>
