@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { asset } from "@/lib/paths";
 import Link from "next/link";
-import { Suspense } from "react";
 import { ArrowRight, Check, Phone } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { Icon } from "@/components/icons";
@@ -166,9 +165,7 @@ export default function KarrierePage() {
             </Reveal>
           </div>
           <Reveal className="rounded-[2rem] bg-white p-6 shadow-xl shadow-ink/[0.05] ring-1 ring-line sm:p-10">
-            <Suspense>
-              <ApplicationForm />
-            </Suspense>
+            <ApplicationForm />
           </Reveal>
         </Container>
       </section>

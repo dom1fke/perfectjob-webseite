@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Paperclip } from "lucide-react";
 import { jobs } from "@/content/content";
@@ -11,8 +11,21 @@ import { useMailForm } from "./useMailForm";
 
 const text = (data: FormData, name: string) => String(data.get(name) ?? "");
 
-export function ApplicationForm() {
+/**
+ * Liest ?stelle=… (Buttons in den Stellenkarten) und wählt die Stelle vor.
+ * Eigene Komponente in <Suspense>, damit das Formular selbst schon im statischen
+ * HTML steht und nicht erst nach dem Laden des JavaScripts erscheint.
+ */
+function PositionFromQuery({ onSelect }: { onSelect: (title: string) => void }) {
   const params = useSearchParams();
+  useEffect(() => {
+    const job = jobs.find((j) => j.slug === params.get("stelle"));
+    if (job) onSelect(job.title);
+  }, [params, onSelect]);
+  return null;
+}
+
+export function ApplicationForm() {
   const [position, setPosition] = useState("");
   const [showDetails, setShowDetails] = useState(false);
 
@@ -37,18 +50,19 @@ export function ApplicationForm() {
     };
   });
 
-  // Vorauswahl über ?stelle=… (Buttons in den Stellenkarten)
-  useEffect(() => {
-    const slug = params.get("stelle");
-    const job = jobs.find((j) => j.slug === slug);
-    if (job) {
-      setPosition(job.title);
+  const selectPosition = useCallback(
+    (title: string) => {
+      setPosition(title);
       clearError("position");
-    }
-  }, [params, clearError]);
+    },
+    [clearError],
+  );
 
   return (
     <>
+      <Suspense>
+        <PositionFromQuery onSelect={selectPosition} />
+      </Suspense>
       {prepared && <MessageOpened message={prepared} channel={channel} attachHint onBack={back} />}
       <form
         noValidate
