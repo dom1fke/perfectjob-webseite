@@ -42,6 +42,23 @@
     -webkit-text-size-adjust: 100%;
     scroll-padding-top: 6rem;
   }
+  /* Große und Widescreen-Monitore: alles in rem wächst proportional mit
+     (Schrift, Abstände und die Inhaltsbreite max-w-7xl = 80rem). */
+  @media (min-width: 1800px) {
+    html {
+      font-size: 110%;
+    }
+  }
+  @media (min-width: 2300px) {
+    html {
+      font-size: 125%;
+    }
+  }
+  @media (min-width: 3000px) {
+    html {
+      font-size: 140%;
+    }
+  }
   body {
     background: #fff;
     color: var(--color-ink);
