@@ -40,3 +40,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Webspace-Build
+/webspace-build
+/.webspace-work
+perfectjob-config.php
+php/lib/config.php

@@ -17,8 +17,8 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description: site.description,
-  // Die GitHub-Pages-Vorschau soll nicht in Suchmaschinen auftauchen
-  robots: isStaticPreview ? { index: false, follow: false } : undefined,
+  // Vorschau (GitHub Pages) und Testordner sollen nicht in Suchmaschinen auftauchen
+  robots: isStaticPreview || process.env.NEXT_PUBLIC_NOINDEX === "true" ? { index: false, follow: false } : undefined,
   openGraph: {
     type: "website",
     locale: "de_DE",

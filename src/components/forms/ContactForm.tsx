@@ -4,9 +4,10 @@ import { useState } from "react";
 import { contactTopics } from "@/lib/validation";
 import { FormAlert, FormSuccess, PrivacyCheckbox, SelectField, SpamFields, SubmitButton, TextArea, TextField } from "./fields";
 import { useFormSubmit } from "./useFormSubmit";
+import { apiUrl } from "@/lib/paths";
 
 export function ContactForm({ defaultTopic = contactTopics[0] }: { defaultTopic?: (typeof contactTopics)[number] }) {
-  const { status, errors, formError, startedAt, onSubmit, clearError, reset } = useFormSubmit("/api/kontakt");
+  const { status, errors, formError, startedAt, onSubmit, clearError, reset } = useFormSubmit(apiUrl("kontakt"));
   const [topic, setTopic] = useState<string>(defaultTopic);
   const isClient = topic === "Personalanfrage (Einrichtung)";
 

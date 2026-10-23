@@ -18,6 +18,7 @@ import {
   TextField,
 } from "./fields";
 import { useFormSubmit } from "./useFormSubmit";
+import { apiUrl } from "@/lib/paths";
 
 const formatSize = (bytes: number) =>
   bytes < 1024 * 1024 ? `${Math.max(1, Math.round(bytes / 1024))} KB` : `${(bytes / 1024 / 1024).toFixed(1)} MB`;
@@ -30,7 +31,7 @@ export function ApplicationForm() {
   const [showDetails, setShowDetails] = useState(false);
 
   const { status, errors, formError, startedAt, onSubmit, clearError, reset } = useFormSubmit(
-    "/api/bewerbung",
+    apiUrl("bewerbung"),
     (data) => {
       data.delete("files");
       files.forEach((f) => data.append("files", f));

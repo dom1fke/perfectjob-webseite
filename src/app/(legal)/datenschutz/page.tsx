@@ -55,7 +55,7 @@ export default function DatenschutzPage() {
       <p>
         Wenn Sie uns per Kontaktformular, E-Mail, Telefon oder WhatsApp kontaktieren, verarbeiten wir Ihre Angaben (z.
         B. Name, E-Mail-Adresse, Telefonnummer, Einrichtung, Nachricht), um Ihre Anfrage zu bearbeiten. Die Angaben aus
-        dem Kontaktformular werden per verschlüsselter E-Mail an uns übermittelt und nicht auf dem Webserver
+        dem Kontaktformular werden per E-Mail an uns weitergeleitet und nicht auf dem Webserver
         gespeichert.
       </p>
       <p>
@@ -75,7 +75,7 @@ export default function DatenschutzPage() {
         Wenn Sie sich über unser Bewerbungsformular oder auf anderem Weg bei uns bewerben, verarbeiten wir Ihre
         Angaben (Kontaktdaten, Qualifikation, gewünschte Arbeitszeit, Nachricht sowie freiwillig hochgeladene
         Unterlagen wie Lebenslauf und Zeugnisse) ausschließlich zur Durchführung des Bewerbungsverfahrens. Die Daten
-        werden per verschlüsselter E-Mail an uns übermittelt und nicht auf dem Webserver gespeichert. Sie erhalten eine
+        werden per E-Mail an uns weitergeleitet und nicht auf dem Webserver gespeichert. Sie erhalten eine
         automatische Eingangsbestätigung an die angegebene E-Mail-Adresse.
       </p>
       <p>

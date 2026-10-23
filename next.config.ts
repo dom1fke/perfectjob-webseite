@@ -1,8 +1,9 @@
 import type { NextConfig } from "next";
 
 const isDev = process.env.NODE_ENV !== "production";
-// Statische Vorschau für GitHub Pages (siehe .github/workflows/pages.yml)
-const isStaticPreview = process.env.NEXT_PUBLIC_STATIC_PREVIEW === "true";
+// Statischer Export: GitHub-Pages-Vorschau (.github/workflows/pages.yml) oder Webspace mit PHP (scripts/build-webspace.mjs)
+const isStaticExport =
+  process.env.NEXT_PUBLIC_STATIC_PREVIEW === "true" || process.env.NEXT_PUBLIC_DEPLOY_TARGET === "webspace";
 
 const csp = [
   "default-src 'self'",
@@ -37,12 +38,12 @@ const serverConfig: NextConfig = {
   },
 };
 
-// GitHub Pages liefert nur statische Dateien aus: kein Server, keine Header, keine Bildoptimierung.
-const staticPreviewConfig: NextConfig = {
+// Statische Dateien: kein Node-Server, keine Bildoptimierung. Header kommen auf dem Webspace aus php/.htaccess.
+const staticExportConfig: NextConfig = {
   output: "export",
   basePath: process.env.NEXT_PUBLIC_BASE_PATH,
   trailingSlash: true,
   images: { unoptimized: true },
 };
 
-export default isStaticPreview ? staticPreviewConfig : serverConfig;
+export default isStaticExport ? staticExportConfig : serverConfig;
