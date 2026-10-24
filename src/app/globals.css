@@ -45,12 +45,13 @@
     -webkit-text-size-adjust: 100%;
     scroll-padding-top: 6rem;
   }
-  /* Fließende Skalierung: Ab ca. 1440 px Fensterbreite wachsen Schrift, Abstände und
-     Inhaltsbreite (alles in rem) stufenlos mit – auch beim Herauszoomen im Browser.
-     16 px bei 1440 px · ca. 18 px bei 1920 px · max. 22 px; rem statt px, damit die
-     Schriftgrößen-Einstellung des Browsers respektiert wird. */
+  /* Proportionale Skalierung: Ab 1536 px Fensterbreite wächst die gesamte Seite
+     (Schrift, Abstände, Kopfzeile, Inhaltsbreite – alles in rem) im gleichen Verhältnis
+     wie das Fenster mit, ohne Obergrenze. Die Inhaltsbreite (88rem) bleibt dadurch immer
+     bei ca. 92 % der Fensterbreite – auch auf Ultrawide-Monitoren und beim Herauszoomen.
+     Darunter gilt die normale Grundschrift (1rem, respektiert die Browser-Einstellung). */
   html {
-    font-size: clamp(1rem, 0.4vw + 0.64rem, 1.375rem);
+    font-size: max(1rem, 100vw / 96);
   }
   body {
     background: #fff;
