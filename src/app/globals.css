@@ -21,6 +21,9 @@
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Outfit Variable", "Inter Variable", ui-sans-serif, sans-serif;
 
+  /* Inhaltsbreite der Seite (Container, Kopf- und Fußzeile) */
+  --container-site: 88rem;
+
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
   --animate-fade-up: fade-up 0.7s var(--ease-out-soft) both;
 
@@ -42,22 +45,12 @@
     -webkit-text-size-adjust: 100%;
     scroll-padding-top: 6rem;
   }
-  /* Große und Widescreen-Monitore: alles in rem wächst proportional mit
-     (Schrift, Abstände und die Inhaltsbreite max-w-7xl = 80rem). */
-  @media (min-width: 1800px) {
-    html {
-      font-size: 110%;
-    }
-  }
-  @media (min-width: 2300px) {
-    html {
-      font-size: 125%;
-    }
-  }
-  @media (min-width: 3000px) {
-    html {
-      font-size: 140%;
-    }
+  /* Fließende Skalierung: Ab ca. 1440 px Fensterbreite wachsen Schrift, Abstände und
+     Inhaltsbreite (alles in rem) stufenlos mit – auch beim Herauszoomen im Browser.
+     16 px bei 1440 px · ca. 18 px bei 1920 px · max. 22 px; rem statt px, damit die
+     Schriftgrößen-Einstellung des Browsers respektiert wird. */
+  html {
+    font-size: clamp(1rem, 0.4vw + 0.64rem, 1.375rem);
   }
   body {
     background: #fff;
