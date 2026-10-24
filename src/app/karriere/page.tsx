@@ -47,7 +47,7 @@ export default function KarrierePage() {
             title="Warum Pflegekräfte gern bei uns arbeiten"
             intro="Neueinsteiger:innen, Wiedereinsteiger:innen oder Profis mit langjähriger Erfahrung: Bei uns finden Sie einen Arbeitgeber, der Pflege versteht."
           />
-          <div className="mt-14 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-14 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-6">
             {employeeBenefits.map((b, i) => (
               <Reveal key={b.title} delay={(i % 3) * 90} className="flex gap-5">
                 <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-brand-50 text-brand-600">
@@ -67,7 +67,7 @@ export default function KarrierePage() {
       <section id="stellen" className="bg-sand py-20 sm:py-28">
         <Container>
           <SectionHeading eyebrow="Offene Stellen" title="Finden Sie Ihre Position" />
-          <div className="mt-12 grid gap-5 lg:grid-cols-3">
+          <div className="mt-12 grid gap-5 lg:grid-cols-3 3xl:grid-cols-4">
             {jobs.map((job, i) => (
               <Reveal
                 key={job.slug}
@@ -109,13 +109,20 @@ export default function KarrierePage() {
                 </Link>
               </Reveal>
             ))}
+            {/* Unter den Stellen bzw. auf breiten Ansichten als vierte Karte daneben */}
+            <Reveal className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-ink/20 p-6 text-center sm:p-8 lg:col-span-3 3xl:col-span-1">
+              <p className="font-display text-lg font-semibold">Nichts Passendes dabei?</p>
+              <p className="mt-1 text-muted">
+                Bewerben Sie sich initiativ – wir finden gemeinsam den richtigen Einsatz für Sie.
+              </p>
+              <Link
+                href="/karriere?stelle=initiativ#bewerben"
+                className="mt-5 inline-flex items-center gap-2 font-semibold text-brand-700 hover:underline"
+              >
+                Initiativ bewerben <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </Reveal>
           </div>
-          <Reveal className="mt-8 rounded-2xl border border-dashed border-ink/20 p-6 text-center sm:p-8">
-            <p className="font-display text-lg font-semibold">Nichts Passendes dabei?</p>
-            <p className="mt-1 text-muted">
-              Bewerben Sie sich initiativ – wir finden gemeinsam den richtigen Einsatz für Sie.
-            </p>
-          </Reveal>
         </Container>
       </section>
 
@@ -138,7 +145,7 @@ export default function KarrierePage() {
               title="Bewerben Sie sich jetzt."
               intro="Ein paar Angaben genügen – den Rest klären wir im persönlichen Gespräch. Lebenslauf? Gern, aber kein Muss."
             />
-            <Reveal className="relative mt-8 hidden aspect-[4/3] overflow-hidden rounded-3xl lg:block">
+            <Reveal className="relative mt-8 hidden aspect-[4/3] overflow-hidden rounded-3xl lg:block 3xl:aspect-[16/9]">
               <Image
                 src={asset("/images/bewerbung-laptop.jpg")}
                 alt="Junge Frau bewirbt sich entspannt am Laptop"

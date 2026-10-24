@@ -59,7 +59,7 @@ export function Header() {
           Zum Inhalt springen
         </a>
         <div
-          className={`mx-auto flex max-w-site items-center justify-between gap-6 px-4 transition-[height] duration-300 sm:px-6 lg:px-8 ${
+          className={`mx-auto flex max-w-site items-center justify-between gap-6 px-4 sm:px-6 lg:px-10 2xl:px-16 transition-[height] duration-300 ${
             scrolled ? "h-16 lg:h-[4.5rem]" : "h-[4.5rem] lg:h-20"
           }`}
         >

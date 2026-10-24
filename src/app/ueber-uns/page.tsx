@@ -52,7 +52,7 @@ export default function UeberUnsPage() {
       {/* Geschichte / Mission */}
       <section className="py-20 sm:py-28">
         <Container className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-          <Reveal className="relative aspect-[4/3] overflow-hidden rounded-[2rem] shadow-2xl shadow-ink/10">
+          <Reveal className="relative aspect-[4/3] overflow-hidden rounded-[2rem] shadow-2xl shadow-ink/10 3xl:aspect-[16/9] 4xl:aspect-[21/9]">
             <Image
               src={asset("/images/team-haende.jpg")}
               alt="Ein Team aus Pflegekräften hält zusammen"

@@ -106,7 +106,7 @@ export default function EinrichtungenPage() {
             title="Sorgfältig ausgewählt. Rechtlich sicher."
             intro="Wir arbeiten auf Grundlage des Arbeitnehmerüberlassungsgesetzes (AÜG) mit Erlaubnis der Bundesagentur für Arbeit. Jede Pflegekraft lernen wir persönlich kennen, bevor sie bei Ihnen im Einsatz ist."
           />
-          <Reveal as="ul" className="grid gap-3 sm:grid-cols-2">
+          <Reveal as="ul" className="grid gap-3 sm:grid-cols-2 3xl:grid-cols-3">
             {qualityPoints.map((p) => (
               <li key={p} className="flex gap-3 rounded-2xl bg-sand p-4 text-[0.95rem] leading-snug">
                 <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand-600 text-white">

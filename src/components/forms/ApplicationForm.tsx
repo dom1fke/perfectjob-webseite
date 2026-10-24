@@ -19,7 +19,9 @@ const text = (data: FormData, name: string) => String(data.get(name) ?? "");
 function PositionFromQuery({ onSelect }: { onSelect: (title: string) => void }) {
   const params = useSearchParams();
   useEffect(() => {
-    const job = jobs.find((j) => j.slug === params.get("stelle"));
+    const slug = params.get("stelle");
+    if (slug === "initiativ") return onSelect("Initiativbewerbung");
+    const job = jobs.find((j) => j.slug === slug);
     if (job) onSelect(job.title);
   }, [params, onSelect]);
   return null;

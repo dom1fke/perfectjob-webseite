@@ -21,8 +21,13 @@
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Outfit Variable", "Inter Variable", ui-sans-serif, sans-serif;
 
-  /* Inhaltsbreite der Seite (Container, Kopf- und Fußzeile) */
-  --container-site: 88rem;
+  /* Inhaltsbreite: nutzt fast die ganze Fensterbreite (Seitenrand über Container-Padding),
+     Obergrenze nur für extrem breite Ansichten (z. B. stark herausgezoomt). */
+  --container-site: 240rem;
+
+  /* Zusätzliche Breakpoints für breite Monitore / Herauszoomen: mehr Spalten statt Leerraum */
+  --breakpoint-3xl: 120rem;
+  --breakpoint-4xl: 160rem;
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
   --animate-fade-up: fade-up 0.7s var(--ease-out-soft) both;
@@ -44,14 +49,6 @@
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
     scroll-padding-top: 6rem;
-  }
-  /* Proportionale Skalierung: Ab 1536 px Fensterbreite wächst die gesamte Seite
-     (Schrift, Abstände, Kopfzeile, Inhaltsbreite – alles in rem) im gleichen Verhältnis
-     wie das Fenster mit, ohne Obergrenze. Die Inhaltsbreite (88rem) bleibt dadurch immer
-     bei ca. 92 % der Fensterbreite – auch auf Ultrawide-Monitoren und beim Herauszoomen.
-     Darunter gilt die normale Grundschrift (1rem, respektiert die Browser-Einstellung). */
-  html {
-    font-size: max(1rem, 100vw / 96);
   }
   body {
     background: #fff;

@@ -22,7 +22,7 @@ export default function Home() {
       {/* Hero */}
       <section className="relative overflow-hidden bg-sand">
         <BrandPattern className="absolute -bottom-24 -left-24 h-80 w-80 text-brand-600/[0.06]" />
-        <Container className="relative grid items-center gap-12 pt-12 pb-16 sm:pt-16 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:pt-20 lg:pb-24">
+        <Container className="relative grid items-center gap-12 pt-12 pb-16 sm:pt-16 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:pt-20 lg:pb-24 3xl:gap-24">
           <div className="animate-fade-up">
             <Eyebrow>
               Personaldienstleister Pflege<span className="hidden sm:inline"> · {site.region.join(" · ")}</span>
@@ -66,7 +66,7 @@ export default function Home() {
           </div>
 
           <div className="relative animate-fade-up [animation-delay:150ms]">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] shadow-2xl shadow-ink/15 lg:aspect-[4/4.4]">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] shadow-2xl shadow-ink/15 lg:aspect-[4/4.4] 2xl:aspect-[4/3] 3xl:aspect-[16/10] 4xl:aspect-[21/9]">
               <Image
                 src={asset("/images/team-haende.jpg")}
                 alt="Pflegekräfte legen als Zeichen des Zusammenhalts die Hände übereinander"
@@ -120,7 +120,7 @@ export default function Home() {
               </ButtonLink>
             </Reveal>
           </div>
-          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-6">
             {employeeBenefits.map((b, i) => (
               <Reveal
                 key={b.title}
@@ -141,7 +141,7 @@ export default function Home() {
       {/* Für Einrichtungen */}
       <section className="relative overflow-hidden bg-ink py-20 text-white sm:py-28">
         <BrandPattern className="absolute -bottom-28 -left-28 h-[26rem] w-[26rem] text-white/[0.04]" />
-        <Container className="relative grid gap-14 lg:grid-cols-[1fr_1.15fr] lg:gap-20">
+        <Container className="relative grid gap-14 lg:grid-cols-[1fr_1.15fr] lg:gap-20 3xl:grid-cols-[1fr_2fr]">
           <Reveal>
             <Eyebrow light>Für Einrichtungen</Eyebrow>
             <h2 className="mt-4 text-3xl font-semibold sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
@@ -168,7 +168,7 @@ export default function Home() {
               </ButtonLink>
             </div>
           </Reveal>
-          <div className="grid gap-4">
+          <div className="grid gap-4 3xl:grid-cols-3">
             {clientServices.map((s, i) => (
               <Reveal
                 key={s.title}
