@@ -1,12 +1,24 @@
 import Image from "next/image";
 import { asset } from "@/lib/paths";
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, Building2, HeartPulse, MapPin, PhoneCall, ShieldCheck, UserCheck } from "lucide-react";
+import {
+  ArrowRight,
+  BadgeCheck,
+  Building2,
+  Check,
+  HeartPulse,
+  MapPin,
+  Phone,
+  PhoneCall,
+  ShieldCheck,
+  UserCheck,
+} from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { Icon } from "@/components/icons";
+import { ProcessTabs } from "@/components/ProcessTabs";
 import { BrandPattern, ButtonLink, Container, Eyebrow, IconBadge, SectionHeading } from "@/components/ui";
-import { ContactBand, Faq, ProcessSteps } from "@/components/sections";
-import { clientServices, clientTypes, employeeBenefits, faqs, processSteps } from "@/content/content";
+import { ContactBand, Faq } from "@/components/sections";
+import { clientServices, clientTypes, employeeBenefits, faqs, jobs, payHighlights } from "@/content/content";
 import { site } from "@/config/site";
 
 const trustPoints = [
@@ -16,7 +28,15 @@ const trustPoints = [
   { icon: MapPin, title: "Regional verwurzelt", text: "Zu Hause im Rhein-Main-Gebiet" },
 ];
 
+// Senkt die Hemmschwelle direkt unter den Hero-Buttons (Aussagen aus den FAQ)
+const heroFacts = ["Ohne Lebenslauf bewerben", "Vollzeit, Teilzeit oder Minijob", "Feste Anstellung"];
+
 export default function Home() {
+  const [leadBenefit, ...moreBenefits] = employeeBenefits;
+  const wideBenefit = moreBenefits[moreBenefits.length - 1];
+  const gridBenefits = moreBenefits.slice(0, -1);
+  const standby = site.contact.hours[1];
+
   return (
     <>
       {/* Hero */}
@@ -57,12 +77,21 @@ export default function Home() {
                   <Building2 className="h-6 w-6" aria-hidden="true" />
                 </IconBadge>
                 <span className="flex-1">
-                  <span className="block text-sm text-muted">Ich bin Einrichtung</span>
+                  <span className="block text-sm text-muted">Ich bin eine Einrichtung</span>
                   <span className="block font-display text-lg font-semibold">Personal anfragen</span>
                 </span>
                 <ArrowRight className="h-5 w-5 text-muted transition-transform duration-300 group-hover:translate-x-1 group-hover:text-ink" aria-hidden="true" />
               </Link>
             </div>
+
+            <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium text-ink-soft">
+              {heroFacts.map((fact) => (
+                <li key={fact} className="flex items-center gap-1.5">
+                  <Check className="h-4 w-4 text-green-700" aria-hidden="true" strokeWidth={2.5} />
+                  {fact}
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div className="relative animate-fade-up [animation-delay:150ms]">
@@ -105,35 +134,137 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* Für Pflegekräfte */}
+      {/* Für Pflegekräfte – Bento-Raster: stärkstes Argument groß, Rest kompakt */}
       <section className="py-20 sm:py-28">
         <Container>
-          <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
-            <SectionHeading
-              eyebrow="Für Pflegekräfte"
-              title="Ein Arbeitgeber, der Ihnen den Rücken stärkt."
-              intro="Bei uns stehen Sie im Mittelpunkt: faire Bezahlung, planbare Dienste und Menschen, die Ihnen zuhören."
-            />
-            <Reveal>
-              <ButtonLink href="/karriere" arrow>
-                Offene Stellen ansehen
-              </ButtonLink>
+          <SectionHeading
+            eyebrow="Für Pflegekräfte"
+            title="Ein Arbeitgeber, der Ihnen den Rücken stärkt."
+            intro="Bei uns stehen Sie im Mittelpunkt: faire Bezahlung, planbare Dienste und Menschen, die Ihnen zuhören."
+          />
+          <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+            <Reveal className="relative flex flex-col overflow-hidden rounded-3xl bg-brand-600 p-7 text-white sm:col-span-2 sm:p-9 lg:row-span-2">
+              <BrandPattern className="absolute -right-12 -bottom-12 h-64 w-64 text-white/10" />
+              <IconBadge tone="light">
+                <Icon name={leadBenefit.icon} />
+              </IconBadge>
+              <h3 className="mt-8 font-display text-3xl leading-tight font-semibold sm:text-4xl">{leadBenefit.title}</h3>
+              <p className="mt-4 max-w-md text-lg leading-relaxed text-white/85">{leadBenefit.text}</p>
+              <ul className="relative mt-8 grid gap-3 sm:grid-cols-2">
+                {payHighlights.map((item) => (
+                  <li key={item} className="flex items-center gap-3 font-medium">
+                    <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-white/15">
+                      <Check className="h-4 w-4" aria-hidden="true" strokeWidth={2.5} />
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div className="relative mt-10 flex flex-wrap gap-3 lg:mt-auto lg:pt-10">
+                <ButtonLink href="/karriere#stellen" variant="light" arrow>
+                  Offene Stellen ansehen
+                </ButtonLink>
+              </div>
             </Reveal>
-          </div>
-          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-6">
-            {employeeBenefits.map((b, i) => (
+            {gridBenefits.map((b, i) => (
               <Reveal
                 key={b.title}
-                delay={(i % 3) * 90}
-                className="group rounded-3xl border border-line bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-xl hover:shadow-brand-600/[0.07]"
+                delay={(i % 2) * 90}
+                className="group flex gap-4 rounded-3xl border border-line bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-xl hover:shadow-brand-600/[0.07] sm:flex-col sm:gap-0 sm:p-7"
               >
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-50 text-brand-600 transition-colors duration-300 group-hover:bg-brand-600 group-hover:text-white">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-brand-50 text-brand-600 transition-colors duration-300 group-hover:bg-brand-600 group-hover:text-white">
                   <Icon name={b.icon} />
                 </span>
-                <h3 className="mt-6 font-display text-xl font-semibold">{b.title}</h3>
-                <p className="mt-2 leading-relaxed text-muted">{b.text}</p>
+                <div>
+                  <h3 className="font-display text-lg font-semibold sm:mt-6 sm:text-xl">{b.title}</h3>
+                  <p className="mt-1.5 leading-relaxed text-muted sm:mt-2">{b.text}</p>
+                </div>
               </Reveal>
             ))}
+            <Reveal className="flex flex-col gap-5 rounded-3xl bg-sand p-6 sm:col-span-2 sm:p-7 lg:col-span-4 lg:flex-row lg:items-center lg:justify-between">
+              <div className="flex gap-4">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white text-brand-600 shadow-sm">
+                  <Icon name={wideBenefit.icon} />
+                </span>
+                <div>
+                  <h3 className="font-display text-lg font-semibold sm:text-xl">{wideBenefit.title}</h3>
+                  <p className="mt-1.5 leading-relaxed text-muted">{wideBenefit.text}</p>
+                </div>
+              </div>
+              <ul className="hidden flex-wrap gap-2 sm:flex">
+                {site.region.map((city) => (
+                  <li
+                    key={city}
+                    className="flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-sm font-semibold shadow-sm ring-1 ring-line"
+                  >
+                    <MapPin className="h-4 w-4 text-brand-600" aria-hidden="true" />
+                    {city}
+                  </li>
+                ))}
+                <li className="rounded-full px-3 py-2 text-sm text-muted">und Umgebung</li>
+              </ul>
+            </Reveal>
+          </div>
+        </Container>
+      </section>
+
+      {/* Offene Stellen – direkt auf der Startseite statt erst auf der Karriereseite */}
+      <section className="bg-sand py-20 sm:py-28">
+        <Container>
+          <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+            <SectionHeading
+              eyebrow="Offene Stellen"
+              title="Finden Sie Ihre Position."
+              intro="Wählen Sie Ihre Qualifikation – die Bewerbung dauert keine zwei Minuten."
+            />
+            <Reveal>
+              <Link
+                href="/karriere#stellen"
+                className="group inline-flex items-center gap-2 font-semibold text-brand-700 underline-offset-4 hover:underline"
+              >
+                Alle Details zu den Stellen
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+              </Link>
+            </Reveal>
+          </div>
+          <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+            {jobs.map((job, i) => (
+              <Reveal
+                key={job.slug}
+                as="article"
+                delay={i * 90}
+                className="group relative flex flex-col rounded-3xl bg-white p-6 shadow-sm ring-1 ring-line transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-ink/[0.06] sm:p-7"
+              >
+                <div className="flex flex-wrap gap-2 text-xs font-semibold">
+                  <span className="rounded-full bg-brand-50 px-3 py-1 text-brand-700">Vollzeit / Teilzeit</span>
+                  <span className="flex items-center gap-1 rounded-full bg-sand px-3 py-1 text-ink-soft">
+                    <MapPin className="h-3 w-3" aria-hidden="true" /> Rhein-Main
+                  </span>
+                </div>
+                <h3 className="mt-5 font-display text-xl font-semibold sm:text-2xl">{job.title}</h3>
+                <p className="mt-1.5 mb-7 text-muted">{job.short}</p>
+                <Link
+                  href={`/karriere?stelle=${job.slug}#bewerben`}
+                  className="mt-auto inline-flex items-center justify-between gap-2 rounded-full bg-ink py-3 pr-4 pl-6 font-semibold text-white transition-colors duration-200 group-hover:bg-brand-600 after:absolute after:inset-0 after:rounded-3xl"
+                >
+                  Jetzt bewerben
+                  <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+                </Link>
+              </Reveal>
+            ))}
+            <Reveal
+              delay={jobs.length * 90}
+              className="flex flex-col justify-center rounded-3xl border border-dashed border-ink/20 p-6 sm:p-7"
+            >
+              <p className="font-display text-xl font-semibold">Nichts Passendes dabei?</p>
+              <p className="mt-1.5 text-muted">Bewerben Sie sich initiativ – wir finden gemeinsam den richtigen Einsatz.</p>
+              <Link
+                href="/karriere?stelle=initiativ#bewerben"
+                className="mt-5 inline-flex items-center gap-2 font-semibold text-brand-700 hover:underline"
+              >
+                Initiativ bewerben <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </Reveal>
           </div>
         </Container>
       </section>
@@ -184,27 +315,33 @@ export default function Home() {
                 </div>
               </Reveal>
             ))}
+            {/* Bei kurzfristigem Ausfall zählt der direkte Draht – Telefonnummer statt Formular */}
+            <Reveal delay={clientServices.length * 110} className="3xl:col-span-3">
+              <a
+                href={site.contact.phoneHref}
+                className="group flex items-center gap-4 rounded-3xl bg-brand-600 p-5 transition-colors duration-300 hover:bg-brand-700 sm:gap-5 sm:p-7"
+              >
+                <span className="relative grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white text-brand-600">
+                  <Phone className="h-5 w-5" aria-hidden="true" />
+                  <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-green-400 ring-2 ring-brand-600 motion-safe:animate-pulse" aria-hidden="true" />
+                </span>
+                <span className="flex-1">
+                  <span className="block text-sm text-white/80">
+                    Kurzfristiger Ausfall? {standby.days} {standby.time}
+                  </span>
+                  <span className="block font-display text-2xl font-semibold">{site.contact.phone}</span>
+                </span>
+                <ArrowRight className="hidden h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 sm:block" aria-hidden="true" />
+              </a>
+            </Reveal>
           </div>
         </Container>
       </section>
 
-      {/* Ablauf */}
+      {/* Ablauf – umschaltbar für beide Zielgruppen */}
       <section className="bg-sand py-20 sm:py-28">
         <Container>
-          <SectionHeading
-            center
-            eyebrow="So einfach geht's"
-            title="In drei Schritten zum neuen Job"
-            intro="Unkompliziert, schnell und ohne Papierkram-Marathon."
-          />
-          <div className="mt-16">
-            <ProcessSteps steps={processSteps.applicants} />
-          </div>
-          <Reveal className="mt-14 flex justify-center">
-            <ButtonLink href="/karriere#bewerben" arrow>
-              Jetzt in 2 Minuten bewerben
-            </ButtonLink>
-          </Reveal>
+          <ProcessTabs />
         </Container>
       </section>
 

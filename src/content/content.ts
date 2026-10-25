@@ -94,6 +94,14 @@ export const employeeBenefits = [
   },
 ] as const;
 
+// Stichpunkte in der großen Vorteils-Karte „Faire, pünktliche Bezahlung“ (Startseite)
+export const payHighlights = [
+  "Tarifgebundene Vergütung",
+  "Zuschlag für Nachtdienste",
+  "Zuschlag für Wochenenden",
+  "Zuschlag für Feiertage",
+];
+
 export const clientServices = [
   {
     icon: "clock",
